@@ -13,7 +13,7 @@
 		54124F83202CF01C00E77E3B /* HouseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F82202CF01C00E77E3B /* HouseTests.swift */; };
 		54124F85202CF1C600E77E3B /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F84202CF1C600E77E3B /* House.swift */; };
 		54124F88202CFDB100E77E3B /* PersonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F87202CFDB100E77E3B /* PersonTests.swift */; };
-		54124F8A202CFE0600E77E3B /* Characther.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F89202CFE0600E77E3B /* Characther.swift */; };
+		54124F8A202CFE0600E77E3B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F89202CFE0600E77E3B /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,7 @@
 		54124F82202CF01C00E77E3B /* HouseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseTests.swift; sourceTree = "<group>"; };
 		54124F84202CF1C600E77E3B /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
 		54124F87202CFDB100E77E3B /* PersonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTests.swift; sourceTree = "<group>"; };
-		54124F89202CFE0600E77E3B /* Characther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characther.swift; sourceTree = "<group>"; };
+		54124F89202CFE0600E77E3B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				54124F84202CF1C600E77E3B /* House.swift */,
-				54124F89202CFE0600E77E3B /* Characther.swift */,
+				54124F89202CFE0600E77E3B /* Person.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,7 +212,7 @@
 			files = (
 				54124F85202CF1C600E77E3B /* House.swift in Sources */,
 				54124F63202CE4B200E77E3B /* AppDelegate.swift in Sources */,
-				54124F8A202CFE0600E77E3B /* Characther.swift in Sources */,
+				54124F8A202CFE0600E77E3B /* Person.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
