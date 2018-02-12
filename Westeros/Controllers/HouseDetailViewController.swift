@@ -10,26 +10,51 @@ import UIKit
 
 class HouseDetailViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: - Outlets
+    @IBOutlet weak var houseNameLabel: UILabel!
+    @IBOutlet weak var sigilImageView: UIImageView!
+    @IBOutlet weak var wordsLabel: UILabel!
+    
+    // MARK: - Properties
+    let model: House
+    
+    // MARK: - Initialization
+    init(model: House){
+        self.model = model
+        super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Chapuza de los de cupertino relacionada con los nil
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
+    
+    // MARK: - Life Cycle
+    /*
+  override func viewDidLoad() {
+        super.viewDidLoad()
+        syncModelWithView()
+    }
+ */
+ 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        syncModelWithView()
+    }
+    
+   
+    // MARK: - Sync
+    func syncModelWithView(){
+        // Model --> View
+       houseNameLabel.text = "House \(model.name)"
+        sigilImageView.image = model.sigil.image
+        wordsLabel.text = model.words
+        title = model.name
+    }
+    
+    
+    
+    
 
 }

@@ -19,8 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .cyan // UIColor.cyan
         window?.makeKeyAndVisible()
-        let root = UIViewController()
-        window?.rootViewController = root
+        
+        //Crear los modelos
+        let starkSigil = Sigil(image: UIImage(named: "codeIsComing.png")!, description: "Lobo Huargo")
+        let starkHouse = House(name: "Stark", sigil: starkSigil, words: "Se acerca le invierno")
+        
+        let lannisterSigil = Sigil(image: #imageLiteral(resourceName: "lannister.jpg"), description: "Leon Rampante")
+        let lannisterHouse = House(name: "Lannister", sigil: lannisterSigil, words: "Oye mi rugido")
+        
+        //Crear el controlar
+        let starkHouseVC = HouseDetailViewController(model: starkHouse)
+        let lannisterHouseVC = HouseDetailViewController(model: lannisterHouse)
+        
+        // Creamos un combinador
+        let tabBarViewController = UITabBarController()
+        tabBarViewController.viewControllers = [starkHouseVC, lannisterHouseVC]
+        
+        //Asignamos el rootVC
+        window?.rootViewController = tabBarViewController
         return true
     }
 
@@ -45,7 +61,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

@@ -54,8 +54,9 @@ class PersonTests: XCTestCase {
          XCTAssertEqual(tyrion,tyrion)
         
         //Igualdad
-       let enano = Person(name: "Tyrion", alias: "El Enano", house: lannisterHouse)
+        let enano = Person(name: "Tyrion", alias: "El Enano", house: lannisterHouse)
         XCTAssertEqual(enano, tyrion)
+        
         //desigualdad
         XCTAssertNotEqual(tyrion,arya)
     }
