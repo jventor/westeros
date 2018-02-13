@@ -19,6 +19,9 @@
 		54124F90203238F300E77E3B /* targaryenSmall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 54124F8D203238F300E77E3B /* targaryenSmall.jpg */; };
 		54124F9420323A8900E77E3B /* HouseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F9220323A8900E77E3B /* HouseDetailViewController.swift */; };
 		54124F9520323A8900E77E3B /* HouseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54124F9320323A8900E77E3B /* HouseDetailViewController.xib */; };
+		546A7EEE20337C9300C257F3 /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A7EED20337C9300C257F3 /* UIViewController+Additions.swift */; };
+		546A7EF02033808E00C257F3 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A7EEF2033808E00C257F3 /* RepositoryTests.swift */; };
+		546A7EF22033817F00C257F3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A7EF12033817F00C257F3 /* Repository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		54124F8D203238F300E77E3B /* targaryenSmall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = targaryenSmall.jpg; sourceTree = "<group>"; };
 		54124F9220323A8900E77E3B /* HouseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseDetailViewController.swift; sourceTree = "<group>"; };
 		54124F9320323A8900E77E3B /* HouseDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseDetailViewController.xib; sourceTree = "<group>"; };
+		546A7EED20337C9300C257F3 /* UIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
+		546A7EEF2033808E00C257F3 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
+		546A7EF12033817F00C257F3 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,7 @@
 		54124F61202CE4B200E77E3B /* Westeros */ = {
 			isa = PBXGroup;
 			children = (
+				546A7EEC20337C1F00C257F3 /* UIkit extensions */,
 				54124F86202CF83800E77E3B /* Models */,
 				54124F9620323AAE00E77E3B /* Controllers */,
 				54124F912032391C00E77E3B /* Assets */,
@@ -106,6 +113,7 @@
 				54124F79202CE4B200E77E3B /* Info.plist */,
 				54124F82202CF01C00E77E3B /* HouseTests.swift */,
 				54124F87202CFDB100E77E3B /* PersonTests.swift */,
+				546A7EEF2033808E00C257F3 /* RepositoryTests.swift */,
 			);
 			path = WesterosTests;
 			sourceTree = "<group>";
@@ -115,6 +123,7 @@
 			children = (
 				54124F84202CF1C600E77E3B /* House.swift */,
 				54124F89202CFE0600E77E3B /* Person.swift */,
+				546A7EF12033817F00C257F3 /* Repository.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,6 +145,14 @@
 				54124F9320323A8900E77E3B /* HouseDetailViewController.xib */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		546A7EEC20337C1F00C257F3 /* UIkit extensions */ = {
+			isa = PBXGroup;
+			children = (
+				546A7EED20337C9300C257F3 /* UIViewController+Additions.swift */,
+			);
+			path = "UIkit extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,7 +265,9 @@
 				54124F9420323A8900E77E3B /* HouseDetailViewController.swift in Sources */,
 				54124F85202CF1C600E77E3B /* House.swift in Sources */,
 				54124F63202CE4B200E77E3B /* AppDelegate.swift in Sources */,
+				546A7EEE20337C9300C257F3 /* UIViewController+Additions.swift in Sources */,
 				54124F8A202CFE0600E77E3B /* Person.swift in Sources */,
+				546A7EF22033817F00C257F3 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +277,7 @@
 			files = (
 				54124F83202CF01C00E77E3B /* HouseTests.swift in Sources */,
 				54124F88202CFDB100E77E3B /* PersonTests.swift in Sources */,
+				546A7EF02033808E00C257F3 /* RepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

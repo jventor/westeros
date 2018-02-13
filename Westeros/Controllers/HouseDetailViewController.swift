@@ -20,8 +20,11 @@ class HouseDetailViewController: UIViewController {
     
     // MARK: - Initialization
     init(model: House){
+        // Primero, limpiar nuestro propo desorden
         self.model = model
+        // Llamar a super
         super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
+                title = model.name
     }
     
     // Chapuza de los de cupertino relacionada con los nil
@@ -50,7 +53,7 @@ class HouseDetailViewController: UIViewController {
        houseNameLabel.text = "House \(model.name)"
         sigilImageView.image = model.sigil.image
         wordsLabel.text = model.words
-        title = model.name
+
     }
     
     
