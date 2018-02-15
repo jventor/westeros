@@ -21,13 +21,13 @@ class HouseTests: XCTestCase {
     var arya: Person!
     var tyrion: Person!
     
-    override func setUp() {
+    override func setUp() { // se ejecuta antes de cada test
         super.setUp()
         starkSigil   = Sigil(image: UIImage(), description: "Lobo Huargo")
         lannisterSigil = Sigil(image: UIImage(), description: "León rampante")
         
-        starkHouse = House(name: "Stark", sigil: starkSigil, words: "Se acerca el invierno")
-        lannisterHouse = House(name: "Lannister", sigil: lannisterSigil, words: "Oye mi rugido")
+        starkHouse = House(name: "Stark", sigil: starkSigil, words: "Se acerca el invierno", url: URL(string: "http://awoiaf.westeros.org/index.php/House_Stark")!)
+        lannisterHouse = House(name: "Lannister", sigil: lannisterSigil, words: "Oye mi rugido", url: URL(string: "http://awoiaf.westeros.org/index.php/House_Lannister")!)
         
         robb = Person(name: "Robb", alias: "El joven Lobo", house: starkHouse)
         arya = Person(name: "Arya", house: starkHouse)
@@ -62,6 +62,11 @@ class HouseTests: XCTestCase {
         
         starkHouse.add(person: tyrion)
         XCTAssertEqual(starkHouse.count,2, "No se debe añadir Tyrion a la casa Stark")
+        
+       let jaime = Person(name: "Jaime", alias: "El Matarreyes", house: lannisterHouse)
+        let cersei = Person(name: "Cersei", house: lannisterHouse)
+        lannisterHouse.add(persons: jaime, cersei)
+        XCTAssertEqual(lannisterHouse.count,2)
     }
   
     func testHouseEquality(){
@@ -71,7 +76,8 @@ class HouseTests: XCTestCase {
         
         // Igualdad
         
-        let jinxed = House(name: "Stark", sigil: starkSigil, words: "Se acerca el invierno")
+
+        let jinxed = House(name: "Stark", sigil: starkSigil, words: "Se acerca el invierno", url: URL(string: "http://awoiaf.westeros.org/index.php/House_Stark")!)
         XCTAssertEqual(jinxed, starkHouse)
         
         // Desugualdad

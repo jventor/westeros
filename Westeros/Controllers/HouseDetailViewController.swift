@@ -43,6 +43,7 @@ class HouseDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupUI()
         syncModelWithView()
     }
     
@@ -57,7 +58,17 @@ class HouseDetailViewController: UIViewController {
     }
     
     
+    // MARK: - UI
+    func setupUI(){
+        let wikiButton = UIBarButtonItem (title: "Wiki", style: .plain, target: self, action: #selector(displayWiki))
+        navigationItem.rightBarButtonItem = wikiButton
+    }
     
-    
-
+    @objc func displayWiki(){
+        // Creamos el WIkiVC/
+        let wikiViewController = WikiViewController(model: model)
+        
+        //HAcemos push// MARK: -
+        navigationController?.pushViewController(wikiViewController, animated: true)
+    }
 }
