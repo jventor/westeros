@@ -92,6 +92,14 @@ class HouseTests: XCTestCase {
         XCTAssertLessThan(lannisterHouse, starkHouse)
     }
  
+    func testPersonSorted(){
+        let jaime = Person(name: "Jaime", alias: "El Matarreyes", house: lannisterHouse)
+        let cersei = Person(name: "Cersei", house: lannisterHouse)
+        lannisterHouse.add(persons: jaime, cersei, tyrion ) // jaime, cersei, tyrion
+        //XCTAssertEqual(lannisterHouse.count,3)
+        let lannisterSorted = lannisterHouse.sortedMembers
+       XCTAssertEqual(lannisterSorted, [cersei, jaime,tyrion])
+    }
 }
 
 

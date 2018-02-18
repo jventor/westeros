@@ -19,6 +19,8 @@
 		54124F90203238F300E77E3B /* targaryenSmall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 54124F8D203238F300E77E3B /* targaryenSmall.jpg */; };
 		54124F9420323A8900E77E3B /* HouseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F9220323A8900E77E3B /* HouseDetailViewController.swift */; };
 		54124F9520323A8900E77E3B /* HouseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54124F9320323A8900E77E3B /* HouseDetailViewController.xib */; };
+		54427056203A076900DDDFC6 /* MemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54427054203A076900DDDFC6 /* MemberListViewController.swift */; };
+		54427057203A076900DDDFC6 /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54427055203A076900DDDFC6 /* MemberListViewController.xib */; };
 		546A7EEE20337C9300C257F3 /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A7EED20337C9300C257F3 /* UIViewController+Additions.swift */; };
 		546A7EF02033808E00C257F3 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A7EEF2033808E00C257F3 /* RepositoryTests.swift */; };
 		546A7EF22033817F00C257F3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A7EF12033817F00C257F3 /* Repository.swift */; };
@@ -55,6 +57,8 @@
 		54124F8D203238F300E77E3B /* targaryenSmall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = targaryenSmall.jpg; sourceTree = "<group>"; };
 		54124F9220323A8900E77E3B /* HouseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseDetailViewController.swift; sourceTree = "<group>"; };
 		54124F9320323A8900E77E3B /* HouseDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseDetailViewController.xib; sourceTree = "<group>"; };
+		54427054203A076900DDDFC6 /* MemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListViewController.swift; sourceTree = "<group>"; };
+		54427055203A076900DDDFC6 /* MemberListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberListViewController.xib; sourceTree = "<group>"; };
 		546A7EED20337C9300C257F3 /* UIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
 		546A7EEF2033808E00C257F3 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		546A7EF12033817F00C257F3 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				546A7EF420362B8F00C257F3 /* WikiViewController.xib */,
 				546A7EFB2036451600C257F3 /* HouseListViewController.swift */,
 				546A7EFC2036451600C257F3 /* HouseListViewController.xib */,
+				54427054203A076900DDDFC6 /* MemberListViewController.swift */,
+				54427055203A076900DDDFC6 /* MemberListViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 				546A7EF620362B8F00C257F3 /* WikiViewController.xib in Resources */,
 				54124F90203238F300E77E3B /* targaryenSmall.jpg in Resources */,
 				546A7EFE2036451600C257F3 /* HouseListViewController.xib in Resources */,
+				54427057203A076900DDDFC6 /* MemberListViewController.xib in Resources */,
 				54124F9520323A8900E77E3B /* HouseDetailViewController.xib in Resources */,
 				54124F8E203238F300E77E3B /* codeIsComing.png in Resources */,
 				54124F6D202CE4B200E77E3B /* LaunchScreen.storyboard in Resources */,
@@ -284,6 +291,7 @@
 				546A7EF22033817F00C257F3 /* Repository.swift in Sources */,
 				546A7EF520362B8F00C257F3 /* WikiViewController.swift in Sources */,
 				546A7EFD2036451600C257F3 /* HouseListViewController.swift in Sources */,
+				54427056203A076900DDDFC6 /* MemberListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
