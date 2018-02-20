@@ -16,7 +16,7 @@ class WikiViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     // MARK: - Properties
-    let model: House
+    var model: House
     
     // MARK: - Initialization
     init (model: House) {
@@ -39,11 +39,29 @@ class WikiViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(houseDidChange(notification:)), name: NSNotification.Name(rawValue: HOUSE_DID_CHANGE_NOTIFICATION_NAME), object: nil)
+    }
+    
+    @objc func houseDidChange(notification: Notification){
+        if let userInfo = notification.userInfo {
+            model = userInfo[HOUSE_KEY] as! House
+            syncModelWithView()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+
     // MARK: - Sync
     func syncModelWithView(){
         title = model.name
         webView.load (URLRequest(url: model.wikiURL))
     }
+    
 }
 
 extension WikiViewController: WKNavigationDelegate {
@@ -52,7 +70,8 @@ extension WikiViewController: WKNavigationDelegate {
         activityIndicator.isHidden = true
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let type = navigationAction.navigationType
         switch type{
             

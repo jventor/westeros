@@ -13,17 +13,6 @@ final class Person {
     let house: House
     private let _alias: String?
     
-    /*
-    var alias: String {
-        if let _alias = _alias {
-            // Existe y esta en alias
-            return _alias
-        } else {
-            return ""
-        }
-    }
-    */
-    
     var alias: String {
         return _alias ?? ""
     }
@@ -48,7 +37,7 @@ extension Person{
     }
     
     var proxyForComparison: String {
-        return name.uppercased()
+        return fullName.uppercased()
     }
 }
 
@@ -64,12 +53,9 @@ extension Person: Equatable{
     static func ==(lhs: Person, rhs: Person) -> Bool {
         return lhs.proxy == rhs.proxy
     }
-    
-    
 }
 
 // MARK: - Comparable
-
 extension Person: Comparable {
     static func <(lhs: Person, rhs: Person) -> Bool {
         return lhs.proxyForComparison < rhs.proxyForComparison

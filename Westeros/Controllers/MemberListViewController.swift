@@ -9,8 +9,8 @@
 import UIKit
 
 class MemberListViewController: UITableViewController {
-    
-    let model : House
+
+    var model : House
     
     init(model: House){
         self.model = model
@@ -20,6 +20,23 @@ class MemberListViewController: UITableViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(houseDidChange(notification:)), name: NSNotification.Name(rawValue: HOUSE_DID_CHANGE_NOTIFICATION_NAME), object: nil)
+    }
+    
+    @objc func houseDidChange(notification: Notification){
+        if let userInfo = notification.userInfo {
+            model = userInfo[HOUSE_KEY] as! House
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     // MARK: - Table view data source
@@ -33,25 +50,24 @@ class MemberListViewController: UITableViewController {
         return model.count
     }
 
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellId = "MemberCell"
         
-        // Descrubir cual es la casa que tenemos que mosyrar// MARK: -
+        // Descrubir cual es la persona que tenemos que mostrar
         let member = model.sortedMembers[indexPath.row]
         
-        // Crear una celda
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: cellId)
-        }
-        
+        // Preguntar por una celda (a una cache) o Crearla
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId)
+            ?? UITableViewCell(style: .default, reuseIdentifier: cellId)
         // Sicnroniza house (model) con cell (vista)
         
-        cell?.textLabel?.text = member.name
+        cell.textLabel?.text = member.name
         
-        return cell!
+        return cell
     }
-
+ 
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
 }

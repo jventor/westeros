@@ -16,7 +16,7 @@ class HouseDetailViewController: UIViewController {
     @IBOutlet weak var wordsLabel: UILabel!
     
     // MARK: - Properties
-    let model: House
+    var model: House
     
     // MARK: - Initialization
     init(model: House){
@@ -24,7 +24,7 @@ class HouseDetailViewController: UIViewController {
         self.model = model
         // Llamar a super
         super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
-                title = model.name
+        title = model.name
     }
     
     // Chapuza de los de cupertino relacionada con los nil
@@ -33,14 +33,6 @@ class HouseDetailViewController: UIViewController {
     }
     
     // MARK: - Life Cycle
-    /*
-  override func viewDidLoad() {
-        super.viewDidLoad()
-        syncModelWithView()
-    }
- */
- 
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
@@ -51,7 +43,7 @@ class HouseDetailViewController: UIViewController {
     // MARK: - Sync
     func syncModelWithView(){
         // Model --> View
-       houseNameLabel.text = "House \(model.name)"
+        houseNameLabel.text = "House \(model.name)"
         sigilImageView.image = model.sigil.image
         wordsLabel.text = model.words
 
@@ -60,11 +52,15 @@ class HouseDetailViewController: UIViewController {
     
     // MARK: - UI
     func setupUI(){
-        let wikiButton = UIBarButtonItem (title: "Wiki", style: .plain, target: self, action: #selector(displayWiki))
+        let wikiButton = UIBarButtonItem (title: "Wiki", style: .plain,
+                                          target: self, action: #selector(displayWiki))
 
-        let membersButton = UIBarButtonItem(title: "Members", style: .plain, target: self, action: #selector(displayMembers))
+        let membersButton = UIBarButtonItem(title: "Members", style: .plain,
+                                            target: self, action: #selector(displayMembers))
         navigationItem.rightBarButtonItems = [membersButton, wikiButton]
-
+        if model.count == 0 {
+            membersButton.isEnabled = false
+        }
     }
     
     @objc func displayWiki(){
@@ -77,8 +73,16 @@ class HouseDetailViewController: UIViewController {
     
     @objc func displayMembers(){
         let membersController = MemberListViewController(model: model)
-        
         navigationController?.pushViewController(membersController, animated: true)
     }
 
+}
+
+extension HouseDetailViewController: HouseListViewControllerDelegate {
+    func houseListViewController(_ vc: HouseListViewController, didSelectHouse house: House) {
+        self.model = house
+        syncModelWithView()
+    }
+    
+    
 }

@@ -47,10 +47,6 @@ extension House {
     }
     
     func add(persons: Person ...){
-        // Aqui persons es de tipo [Person]
-      //  for person in persons {
-       //     add (person: person)
-       // }
         persons.forEach { add(person: $0) }
     }
 }
