@@ -24,7 +24,8 @@ class HouseDetailViewController: UIViewController {
         self.model = model
         // Llamar a super
         super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
-        title = model.name
+        title = "House"
+        
     }
     
     // Chapuza de los de cupertino relacionada con los nil
@@ -46,9 +47,8 @@ class HouseDetailViewController: UIViewController {
         houseNameLabel.text = "House \(model.name)"
         sigilImageView.image = model.sigil.image
         wordsLabel.text = model.words
-
+        navigationItem.leftBarButtonItem?.title = model.name
     }
-    
     
     // MARK: - UI
     func setupUI(){
@@ -64,10 +64,10 @@ class HouseDetailViewController: UIViewController {
     }
     
     @objc func displayWiki(){
-        // Creamos el WIkiVC/
+        // Creamos el WIkiVC
         let wikiViewController = WikiViewController(model: model)
         
-        //HAcemos push// MARK: -
+        //Hacemos push
         navigationController?.pushViewController(wikiViewController, animated: true)
     }
     
@@ -78,11 +78,10 @@ class HouseDetailViewController: UIViewController {
 
 }
 
+// MARK: - Class extension: HouseDetailViewController
 extension HouseDetailViewController: HouseListViewControllerDelegate {
     func houseListViewController(_ vc: HouseListViewController, didSelectHouse house: House) {
         self.model = house
         syncModelWithView()
     }
-    
-    
 }

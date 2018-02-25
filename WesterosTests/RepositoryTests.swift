@@ -50,7 +50,7 @@ class RepositoryTests: XCTestCase {
         let filtered = Repository.local.houses(filteredBy: { $0.count == 1 })
         XCTAssertEqual (filtered.count, 1)
         
-        let otherFilter = Repository.local.houses(filteredBy: { $0.words.contains("invierno")})
+        let otherFilter = Repository.local.houses(filteredBy: { $0.words.contains("Winter")})
         XCTAssertEqual (otherFilter.count, 1)
     }
 }

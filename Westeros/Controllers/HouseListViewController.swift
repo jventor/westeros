@@ -8,85 +8,107 @@
 
 import UIKit
 
-let HOUSE_DID_CHANGE_NOTIFICATION_NAME = "HouseDidChange"
-let HOUSE_KEY = "HouseKey"
 
-protocol HouseListViewControllerDelegate {
-    // should, will, did
+
+// MARK: - Protocol: HouseListViewControllerDelegate
+protocol HouseListViewControllerDelegate: class {
     
     func houseListViewController (_ vc: HouseListViewController, didSelectHouse house: House)
 }
 
-
+// MARK: - Class: HouseListViewController
 class HouseListViewController: UITableViewController {
     
     // MARK: - Properties
     let model: [House]
-    var delegate: HouseListViewControllerDelegate?
+    weak var delegate: HouseListViewControllerDelegate?
     
-    // MARK: - Initialization// MARK: -
+    // MARK: - Initialization
     init(model: [House]){
         self.model = model
         super.init(style: .plain)
-        title = "Westeros"
+        title = "Houses"
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Cycle of life
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let lastRow = UserDefaults.standard.integer(forKey: Const.LastHouse)
+        let indexPath = IndexPath(row: lastRow, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+    }
+    
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return model.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellId = "HouseCell"
+        
+        // Crear una celda
+        let cell = tableView.reusedOrNewCell(cellId: "HouseCell")
         
         // Descrubir cual es la casa que tenemos que mosyrar// MARK: -
         let house = model[indexPath.row]
-        
-        // Crear una celda
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: cellId)
-        }
-        
+
         // Sicnroniza house (model) con cell (vista)
+        cell.imageView?.image = house.sigil.image
+        cell.textLabel?.text = house.name
         
-        cell?.imageView?.image = house.sigil.image
-        cell?.textLabel?.text = house.name
-        
-        return cell!
+        return cell
     }
  
     // MARK: - table view delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Averiguar que casa han usado
         let house = model[indexPath.row]
         
- /*
-        // Crear un controlador de detalle de esa casa
-        let houseDetailViewController = HouseDetailViewController(model: house)
-        // Hacer un push
-        navigationController?.pushViewController(houseDetailViewController, animated: true)
-    */
         // Avisamos al delegado
         delegate?.houseListViewController(self, didSelectHouse: house)
         
         // Mando la misma info a traves de notificaciones
         let notificationcCenter = NotificationCenter.default
-        
-        let notification = Notification(name: Notification.Name(HOUSE_DID_CHANGE_NOTIFICATION_NAME), object: self, userInfo: [HOUSE_KEY: house])
-        
+        let notification = Notification(name: Notification.Name(Const.HouseDidChangeNotificationName), object: self, userInfo: [Const.HouseKey: house])
         notificationcCenter.post(notification)
+        
+        // Guardar las coordenadas de la ultima casa seleccionada
+        saveLastSelectedHouse(at: indexPath.row)
     }
 }
+
+// MARK: - Class extension: HouseListViewController
+extension HouseListViewController {
+    func saveLastSelectedHouse(at row: Int){
+        let defaults = UserDefaults.standard
+        defaults.set(row, forKey: Const.LastHouse)
+        // Por si las moscas
+        defaults.synchronize()
+    }
+    
+    func lastSelectedHouse() -> House {
+        // Extraer la row del User defaults// MARK: -
+        let row  = UserDefaults.standard.integer(forKey: Const.LastHouse)
+        // Averiguar la casa de ese row// MARK: -
+        let house = model[row]
+        // Devolverla
+        return house
+    }
+}
+
+
+
+
+
+
+
+

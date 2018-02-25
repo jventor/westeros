@@ -8,32 +8,37 @@
 
 import Foundation
 
+// MARK: - Class: Person
 final class Person {
+    // MARK: - Properties
     let name: String
-    let house: House
+    weak var house: House?
     private let _alias: String?
     
+    // MARK: - Calculated properties
     var alias: String {
         return _alias ?? ""
     }
     
-    init(name:String, alias: String? = nil, house: House){
+    // MARK: - Inicialization
+    init(name: String, alias: String? = nil, house: House){
         self.name = name
         _alias = alias
         self.house = house
     }
 }
 
+// MARK: - Class extension: Person
 extension Person {
     var fullName: String {
-        return "\(name) \(house.name)"
+        return "\(name) \(house!.name)"
     }
 }
 
 // MARK: - Proxies
 extension Person{
     var proxy: String {
-        return "\(name) \(alias) \(house.name)"
+        return "\(name) \(alias) \(house!.name)"
     }
     
     var proxyForComparison: String {

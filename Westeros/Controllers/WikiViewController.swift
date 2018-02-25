@@ -13,8 +13,8 @@ class WikiViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var webView: WKWebView!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     // MARK: - Properties
     var model: House
     
@@ -29,7 +29,7 @@ class WikiViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
@@ -41,19 +41,30 @@ class WikiViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Damos de alta de las notificaciones
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(houseDidChange(notification:)), name: NSNotification.Name(rawValue: HOUSE_DID_CHANGE_NOTIFICATION_NAME), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(houseDidChange), name: NSNotification.Name( Const.HouseDidChangeNotificationName), object: nil)
     }
     
     @objc func houseDidChange(notification: Notification){
-        if let userInfo = notification.userInfo {
-            model = userInfo[HOUSE_KEY] as! House
-            syncModelWithView()
-        }
+        // Extraer el userInfo de la notificación
+        guard let info = notification.userInfo else { return }
+        
+        // Sacar la casa del userInfo
+        let house = info[Const.HouseKey] as? House
+        
+        // Actualizar mi modelo
+        model = house!
+        
+        // Sincronizar
+        syncModelWithView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // Damos de baja de las notificaciones
+          let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
     }
 
     // MARK: - Sync
@@ -61,9 +72,9 @@ class WikiViewController: UIViewController {
         title = model.name
         webView.load (URLRequest(url: model.wikiURL))
     }
-    
 }
 
+// MARK: - Class extension: WikiViewController
 extension WikiViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.stopAnimating()
@@ -74,11 +85,10 @@ extension WikiViewController: WKNavigationDelegate {
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let type = navigationAction.navigationType
         switch type{
-            
-        case .linkActivated, .formSubmitted:
-            decisionHandler(.cancel)
-        default:
-            decisionHandler(.allow)
+            case .linkActivated, .formSubmitted:
+                decisionHandler(.cancel)
+            default:
+                decisionHandler(.allow)
         }
     }
 }

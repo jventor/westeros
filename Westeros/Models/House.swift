@@ -8,22 +8,24 @@
 
 import UIKit
 
-
 typealias Words = String
 typealias Members = Set<Person>
 
 // MARK: - House
 final class House {
+    // MARK: - Properties
     let name: String
     let sigil: Sigil
     let words: Words
     let wikiURL: URL
     private var _members: Members
     
+    // MARK: - Calculated properties
     var sortedMembers: [Person] {
         return _members.sorted()
     }
     
+    // MARK: - Initialization
     init(name: String, sigil: Sigil, words: Words, url: URL){
         self.name = name
         self.sigil = sigil
@@ -31,18 +33,16 @@ final class House {
         self.wikiURL = url
         _members = Members()
     }
-    
 }
 
+// MARK: - Class extension
 extension House {
     var count: Int {
         return _members.count
     }
     
     func add(person: Person){
-        guard person.house.name == self.name else {
-            return
-        }
+        guard person.house?.name == self.name else { return }
         _members.insert(person)
     }
     
@@ -52,7 +52,6 @@ extension House {
 }
 
 // MARK: - Proxy
-
 extension  House {
     var proxyForEquality: String {
         return "\(name) \(words) \(count)"
@@ -78,7 +77,6 @@ extension House: Hashable{
 }
 
 // MARK: - Comparable
-
 extension House: Comparable {
     static func <(lhs: House, rhs: House) -> Bool {
         return lhs.proxyForComparison < rhs.proxyForComparison

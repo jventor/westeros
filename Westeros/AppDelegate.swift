@@ -12,33 +12,71 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var houseListViewController : HouseListViewController?
+    var seasonListViewController : SeasonListViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = .cyan // UIColor.cyan
         window?.makeKeyAndVisible()
         
         //Crear los modelos
         let houses = Repository.local.houses
+        let seasons = Repository.local.seasons
         
-        // Creamos los controladores (masterVC detail VC)
-        let houseListViewController = HouseListViewController(model: houses)
-        let houseDetailViewController = HouseDetailViewController(model: houses.first!)
+        
+        // Creamos los masterViews
+        houseListViewController = HouseListViewController(model: houses)
+        seasonListViewController = SeasonListViewController(model: seasons)
+        
+    
+        // Creamos un combinador
+        let tabBarViewController = UITabBarController()
+        tabBarViewController.title = "Westeros"
+        tabBarViewController.delegate = self
+        tabBarViewController.viewControllers = [houseListViewController!, seasonListViewController!]
+        tabBarViewController.tabBar.items?[0].image = UIImage(named: "castle.png")
+        tabBarViewController.tabBar.items?[1].image = UIImage(named: "film.png")
+        tabBarViewController.navigationController?.navigationBar.backgroundColor = UIColor.red
+        
+        // Creamos la vista de detalle que se abrira al arrancar
+        let lastSelectedHouse = houseListViewController?.lastSelectedHouse()
+        let houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse! )
+        
+        //let seasonDetailViewController = SeasonDetailViewController(model: seasons.first!)
         
         // Asugnamos delegados
-        houseListViewController.delegate = houseDetailViewController
+        houseListViewController?.delegate = houseDetailViewController
+        //seasonListViewController?.delegate = seasonDetailViewController
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(masterDidChange), name: NSNotification.Name(rawValue: Const.MasterViewChangeNotificationName), object: nil)
+    
         
         // Crear el UISPlitVC y le asignamos los VC (master y detail)
         let splitViewController = UISplitViewController()
-        splitViewController.viewControllers = [houseListViewController.wrappedInNavigation(), houseDetailViewController.wrappedInNavigation()]
-        
+
+        splitViewController.viewControllers = [tabBarViewController.wrappedInNavigation(), houseDetailViewController.wrappedInNavigation()]
+       
         //Asignamos el rootVC
         window?.rootViewController = splitViewController
+        
+        
+        setupUI()
+        
         return true
     }
 
+    func setupUI(){
+        UINavigationBar.appearance().backgroundColor = UIColor.red
+        UITabBar.appearance().backgroundColor = UIColor.red
+        
+    }
+    
+    @objc func masterDidChange(notification: Notification){
+        
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -59,6 +97,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+}
+
+extension AppDelegate: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController is SeasonListViewController {
+            let season = (viewController as! SeasonListViewController).model.first
+            let seasonDetailViewController = SeasonDetailViewController(model: season!)
+            seasonListViewController?.delegate = seasonDetailViewController
+            self.window?.rootViewController?.showDetailViewController(seasonDetailViewController.wrappedInNavigation(), sender: nil)
+           }
+        else if viewController is HouseListViewController {
+            let house = (viewController as! HouseListViewController).model.first
+            let houseDetailViewController = HouseDetailViewController(model: house!)
+            houseListViewController?.delegate = houseDetailViewController
+            self.window?.rootViewController?.showDetailViewController(houseDetailViewController.wrappedInNavigation(), sender: nil)
+        }
     }
 }
 
