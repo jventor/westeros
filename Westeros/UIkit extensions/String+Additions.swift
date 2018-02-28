@@ -1,5 +1,5 @@
 //
-//  MyTools.swift
+//  String+Additions.swift
 //  Westeros
 //
 //  Created by Jaime Ventor on 28/2/18.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-    func strToDate(date: String, dateFormat: String) -> Date {
+extension String{
+    func toDate( format: String) -> Date? {
         let dateStringFormatter = DateFormatter()
-        dateStringFormatter.dateFormat = dateFormat
-        return dateStringFormatter.date(from: date)!
+        dateStringFormatter.dateFormat = format
+        return dateStringFormatter.date(from: self)
     }
-
-
+}

@@ -18,7 +18,7 @@ final class Episode {
     // MARK: - Inicialization
     init(title: String, issueDate: String, season: Season){
         self.title = title
-        self.issueDate = strToDate(date: issueDate, dateFormat: "dd/MM/yyyy")
+        self.issueDate = issueDate.toDate(format: Const.DateFormat)!
         self.season = season
     }
 }

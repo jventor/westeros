@@ -96,7 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        let vc = (viewController as! UINavigationController).viewControllers.first
+        let vc = (viewController as! UINavigationController).topViewController
+        //let a = vc.t viewControllers.first
         
         if vc is SeasonListViewController {
             let lastSeason = seasonListViewController?.lastSelectedSeason()

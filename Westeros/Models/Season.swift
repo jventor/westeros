@@ -26,7 +26,7 @@ final class Season {
     // MARK: - Inicialization
     init(name: String, releaseDate: String, image: UIImage){
         self.name = name
-        self.releaseDate = strToDate(date: releaseDate, dateFormat: "dd/MM/yyyy")
+        self.releaseDate = releaseDate.toDate(format: Const.DateFormat)!
         self._episodies = Episodies()
         self.image = image
     }

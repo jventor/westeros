@@ -8,12 +8,10 @@
 
 import Foundation
 
-let dateFormat = "dd/MM/yyyy"
-
 extension Date {
     var description : String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
+        dateFormatter.dateFormat = Const.DateFormat
         return dateFormatter.string(from: self)
     }
 }

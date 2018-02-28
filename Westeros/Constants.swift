@@ -27,4 +27,6 @@ enum Const{
     
     static let MasterViewChangeNotificationName = "MasterDidChange"
     static let MasterKey = "MasterKey"
+    
+    static let DateFormat = "dd/MM/yyyy"
 }
