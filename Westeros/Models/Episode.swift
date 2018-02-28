@@ -18,12 +18,7 @@ final class Episode {
     // MARK: - Inicialization
     init(title: String, issueDate: String, season: Season){
         self.title = title
-        
-        // Date
-        let dateStringFormatter = DateFormatter()
-        dateStringFormatter.dateFormat = "dd/MM/yyyy"
-        self.issueDate = dateStringFormatter.date(from: issueDate)!
-        //self.issueDate.
+        self.issueDate = strToDate(date: issueDate, dateFormat: "dd/MM/yyyy")
         self.season = season
     }
 }

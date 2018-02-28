@@ -20,6 +20,7 @@ enum Const{
     
     static let SeasonDidChangeNotificationName = "SeasonDidChange"
     static let SeasonKey = "SeasonKey"
+    static let LastSeason = "lastSeason"
     
     static let EpisodeDidChangeNotificationName = "EpisodeDidChange"
     static let EpisodeKey = "EpisodeKey"

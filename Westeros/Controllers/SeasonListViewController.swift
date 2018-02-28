@@ -10,10 +10,8 @@ import UIKit
 
 // MARK: - Protocol: SeasonListViewControllerDelegate
 protocol SeasonListViewControllerDelegate: class {
-    
     func seasonListViewController (_ vc: SeasonListViewController, didSelectSeason season: Season)
 }
-
 
 // MARK: - Class SeasonListViewController
 class SeasonListViewController: UITableViewController {
@@ -32,9 +30,15 @@ class SeasonListViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Cycle of life
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let lastRow = UserDefaults.standard.integer(forKey: Const.LastSeason)
+        let indexPath = IndexPath(row: lastRow, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+    }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -44,7 +48,6 @@ class SeasonListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         // Reuse o create a cell with id="Seasons"
         let cell = tableView.reusedOrNewCell(cellId: "Seasons")
         
@@ -62,8 +65,31 @@ class SeasonListViewController: UITableViewController {
         delegate?.seasonListViewController(self, didSelectSeason: season)
         
         let notificationCenter = NotificationCenter.default
-        let notification = Notification(name: Notification.Name(Const.SeasonDidChangeNotificationName), object: self, userInfo: [Const.SeasonKey: season])
+        let notification = Notification(name: Notification.Name(Const.SeasonDidChangeNotificationName),
+                                        object: self,
+                                        userInfo: [Const.SeasonKey: season])
         notificationCenter.post(notification)
+        
+        // Guardar las coordenadas de la ultima casa seleccionada
+        saveLastSelectedSeason(at: indexPath.row)
+    }
+}
 
+// MARK: - Class extension: SeasonListViewController
+extension SeasonListViewController {
+    func saveLastSelectedSeason(at row: Int){
+        let defaults = UserDefaults.standard
+        defaults.set(row, forKey: Const.LastSeason)
+        // Por si las moscas
+        defaults.synchronize()
+    }
+    
+    func lastSelectedSeason() -> Season {
+        // Extraer la row del User defaults
+        let row  = UserDefaults.standard.integer(forKey: Const.LastSeason)
+        // Averiguar la temporada de ese row
+        let season = model[row]
+        // Devolverla
+        return season
     }
 }

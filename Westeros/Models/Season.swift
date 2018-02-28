@@ -25,16 +25,9 @@ final class Season {
     
     // MARK: - Inicialization
     init(name: String, releaseDate: String, image: UIImage){
-        
         self.name = name
-        
-        // Date
-        let dateStringFormatter = DateFormatter()
-        dateStringFormatter.dateFormat = "dd/MM/yyyy"
-        self.releaseDate = dateStringFormatter.date(from: releaseDate)!
-
+        self.releaseDate = strToDate(date: releaseDate, dateFormat: "dd/MM/yyyy")
         self._episodies = Episodies()
-        
         self.image = image
     }
 }
@@ -54,7 +47,6 @@ extension Season {
         episodies.forEach { add(episode: $0 ) }
     }
 }
-
 
 // MARK: - Proxy
 extension  Season {

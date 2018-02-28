@@ -9,13 +9,15 @@
 import UIKit
 
 class EpisodeDetailViewController: UIViewController {
-    
+    // MARK: - OUtlets
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblIssueDate: UILabel!
     @IBOutlet weak var lblSeason: UILabel!
+    
     // MARK: - Properties
     var model : Episode
     
+    // MARK: - Initialization
     init(model: Episode){
         self.model = model
         super.init(nibName: nil, bundle: nil)
@@ -32,14 +34,14 @@ class EpisodeDetailViewController: UIViewController {
         super.viewWillAppear(animated)
 
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(seasonDidChange), name: NSNotification.Name(rawValue: Const.SeasonDidChangeNotificationName), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(seasonDidChange),
+                                       name: NSNotification.Name(rawValue: Const.SeasonDidChangeNotificationName),
+                                       object: nil)
     }
     
     @objc func seasonDidChange(notification: Notification){
-        if let userInfo = notification.userInfo {
-            model = (userInfo[Const.SeasonKey] as! Season).sortedEpisodes.first!
-            syncModelWithView()
-        }
+        navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {

@@ -9,12 +9,15 @@
 import UIKit
 
 class MemberDetailViewController: UIViewController {
-    
+    // MARK: - OUtlets
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblHouse: UILabel!
     @IBOutlet weak var lblAlias: UILabel!
+    
+    // MARK: - Properties
     var model : Person
     
+    // MARK: - Initialization
     init (model: Person){
         self.model = model
         super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
@@ -30,14 +33,14 @@ class MemberDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(houseDidChange(notification:)), name: NSNotification.Name(rawValue: Const.HouseDidChangeNotificationName), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(houseDidChange(notification:)),
+                                       name: NSNotification.Name(rawValue: Const.HouseDidChangeNotificationName),
+                                       object: nil)
     }
     
     @objc func houseDidChange(notification: Notification){
-        if let userInfo = notification.userInfo {
-            model = (userInfo[Const.HouseKey] as! House).sortedMembers.first!
-            syncModelWithView()
-        }
+        navigationController?.popViewController(animated: true)
     }
     
     func syncModelWithView(){
@@ -49,13 +52,6 @@ class MemberDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         syncModelWithView()
-
-        // Do any additional setup after loading the view.
     }
 }
 
-//extension MemberDetailViewController: MemberListViewControllerDelegate{
-//    func memberListViewController(_ vc: MemberListViewController, didSelectMember member: Person) {
-//        <#code#>
-//    }
-//}

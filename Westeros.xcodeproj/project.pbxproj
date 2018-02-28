@@ -16,6 +16,8 @@
 		54124F8A202CFE0600E77E3B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F89202CFE0600E77E3B /* Person.swift */; };
 		54124F9420323A8900E77E3B /* HouseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54124F9220323A8900E77E3B /* HouseDetailViewController.swift */; };
 		54124F9520323A8900E77E3B /* HouseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54124F9320323A8900E77E3B /* HouseDetailViewController.xib */; };
+		541AA7722044C7E800BAF48C /* UISplitViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541AA7712044C7E800BAF48C /* UISplitViewController+Additions.swift */; };
+		5434F8D020462FC400F4A305 /* MyTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434F8CF20462FC400F4A305 /* MyTools.swift */; };
 		54427056203A076900DDDFC6 /* MemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54427054203A076900DDDFC6 /* MemberListViewController.swift */; };
 		54427057203A076900DDDFC6 /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54427055203A076900DDDFC6 /* MemberListViewController.xib */; };
 		545B2DD820423B6C006FE190 /* lannister.png in Resources */ = {isa = PBXBuildFile; fileRef = 545B2DD320423B6C006FE190 /* lannister.png */; };
@@ -82,6 +84,8 @@
 		54124F89202CFE0600E77E3B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		54124F9220323A8900E77E3B /* HouseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseDetailViewController.swift; sourceTree = "<group>"; };
 		54124F9320323A8900E77E3B /* HouseDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseDetailViewController.xib; sourceTree = "<group>"; };
+		541AA7712044C7E800BAF48C /* UISplitViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+Additions.swift"; sourceTree = "<group>"; };
+		5434F8CF20462FC400F4A305 /* MyTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTools.swift; sourceTree = "<group>"; };
 		54427054203A076900DDDFC6 /* MemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListViewController.swift; sourceTree = "<group>"; };
 		54427055203A076900DDDFC6 /* MemberListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberListViewController.xib; sourceTree = "<group>"; };
 		545B2DD320423B6C006FE190 /* lannister.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lannister.png; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				54124F6B202CE4B200E77E3B /* LaunchScreen.storyboard */,
 				54124F6E202CE4B200E77E3B /* Info.plist */,
 				54937B492041FAFF009FF8CA /* Constants.swift */,
+				5434F8CF20462FC400F4A305 /* MyTools.swift */,
 			);
 			path = Westeros;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				546A7EED20337C9300C257F3 /* UIViewController+Additions.swift */,
 				54937B372041ABEB009FF8CA /* UITableView+Additions.swift */,
 				54937B3F2041C19E009FF8CA /* Date+Additions.swift */,
+				541AA7712044C7E800BAF48C /* UISplitViewController+Additions.swift */,
 			);
 			path = "UIkit extensions";
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 			files = (
 				54124F9420323A8900E77E3B /* HouseDetailViewController.swift in Sources */,
 				545B2DF720434DE7006FE190 /* MemberDetailViewController.swift in Sources */,
+				5434F8D020462FC400F4A305 /* MyTools.swift in Sources */,
 				54937B322041A2E9009FF8CA /* SeasonListViewController.swift in Sources */,
 				54124F85202CF1C600E77E3B /* House.swift in Sources */,
 				545CE01B203F6F73003248D4 /* Season.swift in Sources */,
@@ -422,6 +429,7 @@
 				546A7EF22033817F00C257F3 /* Repository.swift in Sources */,
 				54937B382041ABEB009FF8CA /* UITableView+Additions.swift in Sources */,
 				546A7EF520362B8F00C257F3 /* WikiViewController.swift in Sources */,
+				541AA7722044C7E800BAF48C /* UISplitViewController+Additions.swift in Sources */,
 				546A7EFD2036451600C257F3 /* HouseListViewController.swift in Sources */,
 				54937B432041E9D8009FF8CA /* EpisodeListViewController.swift in Sources */,
 				54427056203A076900DDDFC6 /* MemberListViewController.swift in Sources */,

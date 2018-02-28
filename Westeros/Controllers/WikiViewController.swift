@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 
 class WikiViewController: UIViewController {
-    
     // MARK: - Outlets
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -32,18 +31,22 @@ class WikiViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         webView.navigationDelegate = self
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         syncModelWithView()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         // Damos de alta de las notificaciones
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(houseDidChange), name: NSNotification.Name( Const.HouseDidChangeNotificationName), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(houseDidChange),
+                                       name: NSNotification.Name( Const.HouseDidChangeNotificationName),
+                                       object: nil)
     }
     
     @objc func houseDidChange(notification: Notification){

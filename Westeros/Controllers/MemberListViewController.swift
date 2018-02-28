@@ -34,7 +34,10 @@ class MemberListViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(houseDidChange(notification:)), name: NSNotification.Name(rawValue: Const.HouseDidChangeNotificationName), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(houseDidChange(notification:)),
+                                       name: NSNotification.Name(rawValue: Const.HouseDidChangeNotificationName),
+                                       object: nil)
     }
     
     @objc func houseDidChange(notification: Notification){
@@ -44,7 +47,6 @@ class MemberListViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -8,17 +8,13 @@
 
 import UIKit
 
-
-
 // MARK: - Protocol: HouseListViewControllerDelegate
 protocol HouseListViewControllerDelegate: class {
-    
     func houseListViewController (_ vc: HouseListViewController, didSelectHouse house: House)
 }
 
 // MARK: - Class: HouseListViewController
 class HouseListViewController: UITableViewController {
-    
     // MARK: - Properties
     let model: [House]
     weak var delegate: HouseListViewControllerDelegate?
@@ -28,7 +24,6 @@ class HouseListViewController: UITableViewController {
         self.model = model
         super.init(style: .plain)
         title = "Houses"
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,11 +48,10 @@ class HouseListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         // Crear una celda
         let cell = tableView.reusedOrNewCell(cellId: "HouseCell")
         
-        // Descrubir cual es la casa que tenemos que mosyrar// MARK: -
+        // Descrubir cual es la casa que tenemos que mostrar
         let house = model[indexPath.row]
 
         // Sicnroniza house (model) con cell (vista)
@@ -68,7 +62,6 @@ class HouseListViewController: UITableViewController {
     }
  
     // MARK: - table view delegate
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Averiguar que casa han usado
         let house = model[indexPath.row]
@@ -78,7 +71,9 @@ class HouseListViewController: UITableViewController {
         
         // Mando la misma info a traves de notificaciones
         let notificationcCenter = NotificationCenter.default
-        let notification = Notification(name: Notification.Name(Const.HouseDidChangeNotificationName), object: self, userInfo: [Const.HouseKey: house])
+        let notification = Notification(name: Notification.Name(Const.HouseDidChangeNotificationName),
+                                        object: self,
+                                        userInfo: [Const.HouseKey: house])
         notificationcCenter.post(notification)
         
         // Guardar las coordenadas de la ultima casa seleccionada
@@ -96,9 +91,9 @@ extension HouseListViewController {
     }
     
     func lastSelectedHouse() -> House {
-        // Extraer la row del User defaults// MARK: -
+        // Extraer la row del User defaults
         let row  = UserDefaults.standard.integer(forKey: Const.LastHouse)
-        // Averiguar la casa de ese row// MARK: -
+        // Averiguar la casa de ese row
         let house = model[row]
         // Devolverla
         return house

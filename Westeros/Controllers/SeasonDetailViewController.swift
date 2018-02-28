@@ -10,7 +10,6 @@ import UIKit
 
 // MARK: - Class: SeasonDetailController
 class SeasonDetailViewController: UIViewController {
-
     // MARK: - OUtlets
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblReleaseDate: UILabel!
@@ -30,13 +29,12 @@ class SeasonDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Cycle of life
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        // Do any additional setup after loading the view.
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,24 +46,22 @@ class SeasonDetailViewController: UIViewController {
         lblName.text = model.name
         lblReleaseDate.text = model.releaseDate.description
         imgSeason.image = model.image
-
     }
     
     // MARK: - UI
     func setupUI(){
-        let episodesButton = UIBarButtonItem (title: "Episodes", style: .plain,
-                                          target: self, action: #selector(displayEpisodes))
+        let episodesButton = UIBarButtonItem (title: "Episodes",
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(displayEpisodes))
          navigationItem.rightBarButtonItem = episodesButton
     }
     
     @objc func displayEpisodes(){
         let episodeListController = EpisodeListViewController(model: model.sortedEpisodes)
         navigationController?.pushViewController(episodeListController, animated: true)
-        
     }
 }
-
-
 
 // MARK: - Extension
 extension SeasonDetailViewController: SeasonListViewControllerDelegate{

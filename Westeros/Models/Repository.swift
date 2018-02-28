@@ -16,25 +16,19 @@ final class Repository {
 
 // MARK: - Protocol: HouseFactory
 protocol HouseFactory{
-   
     typealias FilterHouse = (House) -> Bool
-    
     var houses: [House]{ get }
     
     func house (named: String) -> House?
-
     func houses(filteredBy: FilterHouse) -> [House]
 }
 
 // MARK: - Protocol: Seasonfactory
 protocol SeasonFactory {
-    
     typealias FilterSeason = (Season) -> Bool
-    
     var seasons: [Season] { get }
-    
-    func season(filteredBy: FilterSeason ) -> [Season]
 
+    func season(filteredBy: FilterSeason ) -> [Season]
 }
 
 // MARK: - Class: LocalFactory
@@ -54,7 +48,6 @@ final class LocalFactory: HouseFactory {
         let cersei = Person(name: "Cersei", house: lannisterHouse)
         let jaime = Person(name: "Jaime", alias: "El Matarreyes", house: lannisterHouse)
         let dani = Person(name: "Daenerys", alias: "Madre de Dragones", house: targaryenHouse)
-        
         
         // Add Characters to houses
         starkHouse.add(person: arya)
@@ -117,7 +110,7 @@ extension LocalFactory: SeasonFactory {
         season7.add(episodies: episode7_1, episode7_2)
         
         let episode8_1 = Episode(title: "Episode 08x01", issueDate: "01/01/2019", season: season8)
-        let episode8_2 = Episode(title: "Episode 08x02", issueDate: "01/01/2019", season: season8)
+        let episode8_2 = Episode(title: "Episode 08x02", issueDate: "02/01/2019", season: season8)
         season8.add(episodies: episode8_1, episode8_2)
         
         return [ season1, season2, season3, season4, season5, season6, season7, season8]

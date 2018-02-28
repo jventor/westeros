@@ -18,6 +18,7 @@ class EpisodeListViewController: UITableViewController {
     var model : [Episode]
     weak var delegate: EpisodeListViewControllerDelegate?
     
+    // MARK: - Initialization
     init (model: [Episode]){
         self.model = model
         super.init(style: .plain)
@@ -33,7 +34,10 @@ class EpisodeListViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(seasonDidChange), name: NSNotification.Name(rawValue: Const.SeasonDidChangeNotificationName), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(seasonDidChange),
+                                       name: NSNotification.Name(rawValue: Const.SeasonDidChangeNotificationName),
+                                       object: nil)
     }
     
     @objc func seasonDidChange(notification: Notification){
@@ -45,7 +49,6 @@ class EpisodeListViewController: UITableViewController {
     
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -65,13 +68,6 @@ class EpisodeListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = model[indexPath.row]
-        
-//        delegate?.episodeListViewController(self, didSelectEpisode: episode)
-//
-//        // Mando la misma info a traves de notificaciones
-//        let notificationCenter = NotificationCenter.default
-//        let notification  = Notification(name: Notification.Name(Const.EpisodeDidChangeNotificationName), object: self, userInfo: [Const.EpisodeKey: episode])
-//        notificationCenter.post(notification)
         let episodeDetailViewController = EpisodeDetailViewController(model: episode)
         navigationController?.pushViewController(episodeDetailViewController, animated: true)
         

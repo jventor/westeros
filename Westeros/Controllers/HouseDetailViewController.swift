@@ -25,7 +25,6 @@ class HouseDetailViewController: UIViewController {
         // Llamar a super
         super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
         title = "House"
-        
     }
     
     // Chapuza de los de cupertino relacionada con los nil
@@ -36,11 +35,11 @@ class HouseDetailViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         setupUI()
         syncModelWithView()
     }
     
-   
     // MARK: - Sync
     func syncModelWithView(){
         // Model --> View
@@ -52,12 +51,21 @@ class HouseDetailViewController: UIViewController {
     
     // MARK: - UI
     func setupUI(){
-        let wikiButton = UIBarButtonItem (title: "Wiki", style: .plain,
-                                          target: self, action: #selector(displayWiki))
+        let wikiButton = UIBarButtonItem (
+            title: "Wiki",
+            style: .plain,
+            target: self,
+            action: #selector(displayWiki))
 
-        let membersButton = UIBarButtonItem(title: "Members", style: .plain,
-                                            target: self, action: #selector(displayMembers))
+        let membersButton = UIBarButtonItem(
+            title: "Members",
+            style: .plain,
+            target: self,
+            action: #selector(displayMembers))
+        
         navigationItem.rightBarButtonItems = [membersButton, wikiButton]
+        
+        // Si la casa no tiene miembros deshabilitamos el boton "Members"
         if model.count == 0 {
             membersButton.isEnabled = false
         }
@@ -66,16 +74,15 @@ class HouseDetailViewController: UIViewController {
     @objc func displayWiki(){
         // Creamos el WIkiVC
         let wikiViewController = WikiViewController(model: model)
-        
         //Hacemos push
         navigationController?.pushViewController(wikiViewController, animated: true)
     }
     
     @objc func displayMembers(){
         let membersController = MemberListViewController(model: model)
+        //Hacemos push
         navigationController?.pushViewController(membersController, animated: true)
     }
-
 }
 
 // MARK: - Class extension: HouseDetailViewController
