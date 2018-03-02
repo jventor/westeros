@@ -61,14 +61,23 @@ class SeasonListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Recuperamos el modelo
         let season = model[indexPath.row]
+        
+        // Avisamos al delegado
         delegate?.seasonListViewController(self, didSelectSeason: season)
         
+        // Notificamos el cambio de temporada
         let notificationCenter = NotificationCenter.default
         let notification = Notification(name: Notification.Name(Const.SeasonDidChangeNotificationName),
                                         object: self,
                                         userInfo: [Const.SeasonKey: season])
         notificationCenter.post(notification)
+        
+        if UI_USER_INTERFACE_IDIOM() == .phone {
+            let sdvc = SeasonDetailViewController(model: season)
+            splitViewController?.showDetailViewController(sdvc.wrappedInNavigation(), sender: nil)
+        }
         
         // Guardar las coordenadas de la ultima casa seleccionada
         saveLastSelectedSeason(at: indexPath.row)

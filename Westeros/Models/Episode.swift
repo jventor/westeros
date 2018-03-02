@@ -20,6 +20,8 @@ final class Episode {
         self.title = title
         self.issueDate = issueDate.toDate(format: Const.DateFormat)!
         self.season = season
+        
+        season.add(episode: self)
     }
 }
 

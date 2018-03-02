@@ -51,23 +51,23 @@ class HouseTests: XCTestCase {
         XCTAssertNotNil(lannisterSigil)
     }
     
-    func testAddPersons(){
-        XCTAssertEqual(starkHouse.count,0)
-        
-        starkHouse.add(person: robb)
-        XCTAssertEqual(starkHouse.count,1)
-        
-        starkHouse.add(person: arya)
-        XCTAssertEqual(starkHouse.count,2)
-        
-        starkHouse.add(person: tyrion)
-        XCTAssertEqual(starkHouse.count,2, "No se debe añadir Tyrion a la casa Stark")
-        
-       let jaime = Person(name: "Jaime", alias: "El Matarreyes", house: lannisterHouse)
-        let cersei = Person(name: "Cersei", house: lannisterHouse)
-        lannisterHouse.add(persons: jaime, cersei)
-        XCTAssertEqual(lannisterHouse.count,2)
-    }
+//    func testAddPersons(){
+//        XCTAssertEqual(starkHouse.count,0)
+//
+//        starkHouse.add(person: robb)
+//        XCTAssertEqual(starkHouse.count,1)
+//
+//        starkHouse.add(person: arya)
+//        XCTAssertEqual(starkHouse.count,2)
+//
+//        starkHouse.add(person: tyrion)
+//        XCTAssertEqual(starkHouse.count,2, "No se debe añadir Tyrion a la casa Stark")
+//
+//       let jaime = Person(name: "Jaime", alias: "El Matarreyes", house: lannisterHouse)
+//        let cersei = Person(name: "Cersei", house: lannisterHouse)
+//        lannisterHouse.add(persons: jaime, cersei)
+//        XCTAssertEqual(lannisterHouse.count,2)
+//    }
   
     func testHouseEquality(){
         // Identidad
@@ -76,8 +76,8 @@ class HouseTests: XCTestCase {
         
         // Igualdad
         
-
         let jinxed = House(name: "Stark", sigil: starkSigil, words: "Se acerca el invierno", url: URL(string: "http://awoiaf.westeros.org/index.php/House_Stark")!)
+       // let jinxed = House(name: "Stark", sigil: starkSigil, words: "Se acerca el invierno", url: URL(string: "http://awoiaf.westeros.org/index.php/House_Stark")!)
         XCTAssertEqual(jinxed, starkHouse)
         
         // Desugualdad

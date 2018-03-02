@@ -76,6 +76,11 @@ class HouseListViewController: UITableViewController {
                                         userInfo: [Const.HouseKey: house])
         notificationcCenter.post(notification)
         
+        if UI_USER_INTERFACE_IDIOM() == .phone {
+            let hdvc = HouseDetailViewController(model: house)
+            splitViewController?.showDetailViewController(hdvc.wrappedInNavigation(), sender: nil)
+        }
+        
         // Guardar las coordenadas de la ultima casa seleccionada
         saveLastSelectedHouse(at: indexPath.row)
     }

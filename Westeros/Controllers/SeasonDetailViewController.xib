@@ -23,37 +23,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bq-Ck-3h8">
-                    <rect key="frame" x="112" y="172" width="150" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bq-Ck-3h8">
+                    <rect key="frame" x="12" y="105" width="350" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFn-TV-rcr">
-                    <rect key="frame" x="112" y="124" width="150" height="24"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="99O-CH-CDF">
+                    <rect key="frame" x="12" y="134" width="350" height="450"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFn-TV-rcr">
+                    <rect key="frame" x="12" y="73" width="350" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="99O-CH-CDF">
-                    <rect key="frame" x="48" y="216" width="278" height="351"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="351" id="vS3-92-S0c"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="KFn-TV-rcr" firstAttribute="leading" secondItem="9bq-Ck-3h8" secondAttribute="leading" id="2Ev-Cb-Id7"/>
-                <constraint firstItem="99O-CH-CDF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="48" id="3gV-ru-1Y8"/>
-                <constraint firstItem="99O-CH-CDF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5is-jp-Iqu"/>
-                <constraint firstItem="99O-CH-CDF" firstAttribute="centerX" secondItem="KFn-TV-rcr" secondAttribute="centerX" id="DA6-64-J8c"/>
-                <constraint firstItem="KFn-TV-rcr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="104" id="Y6o-u8-MgR"/>
-                <constraint firstItem="99O-CH-CDF" firstAttribute="top" secondItem="9bq-Ck-3h8" secondAttribute="bottom" constant="23" id="Z4m-Ve-1uC"/>
-                <constraint firstItem="99O-CH-CDF" firstAttribute="centerX" secondItem="9bq-Ck-3h8" secondAttribute="centerX" id="fVS-jh-oi9"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="99O-CH-CDF" secondAttribute="bottom" constant="100" id="nrN-NW-cRR"/>
-                <constraint firstItem="KFn-TV-rcr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="112" id="xwC-AT-OUh"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="35.5" y="54.5"/>
         </view>

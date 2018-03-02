@@ -15,8 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let splitViewController = UISplitViewController()
     var houseListViewController : HouseListViewController?
     var seasonListViewController : SeasonListViewController?
-
+    
+    var houseDetailViewController : HouseDetailViewController?
+    var seasonDetailViewController : SeasonDetailViewController?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
@@ -40,24 +44,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarViewController.tabBar.items?[0].image = UIImage(named: "castle.png")
         tabBarViewController.tabBar.items?[1].image = UIImage(named: "film.png")
         tabBarViewController.navigationController?.navigationBar.backgroundColor = UIColor.red
+        tabBarViewController.title = "Westeros"
         
         // Creamos la vista de detalle que se abrira al arrancar
         let lastSelectedHouse = houseListViewController?.lastSelectedHouse()
-        let houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse! )
+        houseDetailViewController = HouseDetailViewController(model: lastSelectedHouse! )
+        let lastSelectedSeason = seasonListViewController?.lastSelectedSeason()
+        seasonDetailViewController = SeasonDetailViewController(model: lastSelectedSeason! )
         
         // Asugnamos delegados
         houseListViewController?.delegate = houseDetailViewController
-      
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.addObserver(self, selector: #selector(masterDidChange), name: NSNotification.Name(rawValue: Const.MasterViewChangeNotificationName), object: nil)
-    
-        splitViewController.viewControllers = [tabBarViewController, houseDetailViewController.wrappedInNavigation()]
+        seasonListViewController?.delegate = seasonDetailViewController
+        
+        //splitViewController.delegate = self
+        splitViewController.viewControllers = [tabBarViewController.wrappedInNavigation(), (houseDetailViewController?.wrappedInNavigation())!]
        
         //Asignamos el rootVC
         window?.rootViewController = splitViewController
         
+        
         setupUI()
         
+//        if let svc = self.window?.rootViewController as? UISplitViewController {
+//            svc.preferredDisplayMode = .allVisible
+//            if let nc = svc.viewControllers.last as? UINavigationController {
+//                nc.topViewController?.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
+//            }
+//        }
+//        
         return true
     }
 
@@ -69,7 +83,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    @objc func masterDidChange(notification: Notification){
 //
 //    }
-    
+//    func applicationDidFinishLaunching(_ application: UIApplication) {
+//        if let svc = self.window?.rootViewController as? UISplitViewController {
+//            svc.preferredDisplayMode = .allVisible
+//            if let nc = svc.viewControllers.last as? UINavigationController {
+//                nc.topViewController?.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
+//            }
+//        }
+//    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -96,24 +117,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        let vc = (viewController as! UINavigationController).topViewController
-        //let a = vc.t viewControllers.first
-        
+        let vc = (viewController as! UINavigationController).viewControllers.first
+
         if vc is SeasonListViewController {
-            let lastSeason = seasonListViewController?.lastSelectedSeason()
-          //  let season = (vc as! SeasonListViewController).model.first
-            let seasonDetailViewController = SeasonDetailViewController(model: lastSeason!)
-            seasonListViewController?.delegate = seasonDetailViewController
-            splitViewController.showDetailViewController(seasonDetailViewController.wrappedInNavigation(), sender: nil)
-           }
-        else if vc is HouseListViewController {
-            //let house = (vc as! HouseListViewController).model.first
-            let lastHouse = houseListViewController?.lastSelectedHouse()
-            let houseDetailViewController = HouseDetailViewController(model: lastHouse!)
-            houseListViewController?.delegate = houseDetailViewController
-            splitViewController.showDetailViewController(houseDetailViewController.wrappedInNavigation(), sender: nil)
-            
+           splitViewController.showDetailViewController((seasonDetailViewController?.wrappedInNavigation())!, sender: nil)
         }
+        else if vc is HouseListViewController {
+                splitViewController.showDetailViewController((houseDetailViewController?.wrappedInNavigation())!, sender: nil)
+          }
     }
 }
+
+//extension AppDelegate: UISplitViewControllerDelegate {
+//    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+//        return true
+//    }
+//    func primaryViewController(forCollapsing splitViewController: UISplitViewController) -> UIViewController? {
+//        return splitViewController.viewControllers.first
+//    }
+//}
 

@@ -54,7 +54,7 @@ extension House {
 // MARK: - Proxy
 extension  House {
     var proxyForEquality: String {
-        return "\(name) \(words) \(count)"
+        return "\(name) \(words)"
     }
     
     var proxyForComparison: String {

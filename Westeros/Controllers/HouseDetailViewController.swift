@@ -35,7 +35,6 @@ class HouseDetailViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setupUI()
         syncModelWithView()
     }
@@ -89,6 +88,8 @@ class HouseDetailViewController: UIViewController {
 extension HouseDetailViewController: HouseListViewControllerDelegate {
     func houseListViewController(_ vc: HouseListViewController, didSelectHouse house: House) {
         self.model = house
+        self.loadView()
         syncModelWithView()
+       // navigationController?.pushViewController(self.wrappedInNavigation(), animated: true)
     }
 }

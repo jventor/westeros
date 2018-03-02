@@ -25,6 +25,9 @@ final class Person {
         self.name = name
         _alias = alias
         self.house = house
+        
+        // Como pertenece a una casa lo añadimos
+        house.add(person: self)
     }
 }
 

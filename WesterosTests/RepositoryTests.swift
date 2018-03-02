@@ -53,4 +53,9 @@ class RepositoryTests: XCTestCase {
         let otherFilter = Repository.local.houses(filteredBy: { $0.words.contains("Winter")})
         XCTAssertEqual (otherFilter.count, 1)
     }
+    
+    func testLocalRepositoryReturnHouseTypesafe(){
+        let stark = Repository.local.house(named: .Stark)
+        XCTAssertEqual(stark?.name, "Stark")
+    }
 }
