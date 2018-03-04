@@ -28,7 +28,6 @@ class EpisodeDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Cycle of life
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,7 +52,6 @@ class EpisodeDetailViewController: UIViewController {
         lblTitle.text = model.title
         lblIssueDate.text = model.issueDate.description
         lblSeason.text = model.season?.name
-
     }
 }
 

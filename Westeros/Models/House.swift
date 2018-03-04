@@ -8,6 +8,20 @@
 
 import UIKit
 
+enum Houses: String {
+    case Stark = "Stark"
+    case Lannister = "Lannister"
+    case Targaryen = "Targaryen"
+    case Tyrell = "Tyrell"
+    case Martell = "Martell"
+    case Baratheon = "Baratheon"
+    case Tully = "Tully"
+    case Greyjoy = "Greyjoy"
+    case Arryn = "Arryn"
+    case Hightower = "Hightower"
+    case Frey = "Frey"
+}
+
 typealias Words = String
 typealias Members = Set<Person>
 

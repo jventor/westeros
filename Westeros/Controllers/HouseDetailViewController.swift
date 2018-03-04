@@ -90,6 +90,5 @@ extension HouseDetailViewController: HouseListViewControllerDelegate {
         self.model = house
         self.loadView()
         syncModelWithView()
-       // navigationController?.pushViewController(self.wrappedInNavigation(), animated: true)
     }
 }

@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Creamos un combinador
         let tabBarViewController = UITabBarController()
-        //tabBarViewController.title = "Westeros"
         tabBarViewController.delegate = self
         tabBarViewController.viewControllers = [
             houseListViewController!.wrappedInNavigation(),
@@ -52,26 +51,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let lastSelectedSeason = seasonListViewController?.lastSelectedSeason()
         seasonDetailViewController = SeasonDetailViewController(model: lastSelectedSeason! )
         
-        // Asugnamos delegados
-        houseListViewController?.delegate = houseDetailViewController
-        seasonListViewController?.delegate = seasonDetailViewController
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // Si  es un ipad asignamos
+            houseListViewController?.delegate = houseDetailViewController
+            seasonListViewController?.delegate = seasonDetailViewController
+        }
+        else {
+            // Si es un iphone asignamos como delegados a lso Detail
+            houseListViewController?.delegate = houseListViewController
+            seasonListViewController?.delegate = seasonListViewController
+        }
         
         //splitViewController.delegate = self
-        splitViewController.viewControllers = [tabBarViewController.wrappedInNavigation(), (houseDetailViewController?.wrappedInNavigation())!]
+        splitViewController.viewControllers = [tabBarViewController, (houseDetailViewController?.wrappedInNavigation())!]
        
         //Asignamos el rootVC
         window?.rootViewController = splitViewController
         
-        
         setupUI()
         
-//        if let svc = self.window?.rootViewController as? UISplitViewController {
-//            svc.preferredDisplayMode = .allVisible
-//            if let nc = svc.viewControllers.last as? UINavigationController {
-//                nc.topViewController?.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
-//            }
-//        }
-//        
         return true
     }
 
@@ -80,17 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = UIColor.red
     }
     
-//    @objc func masterDidChange(notification: Notification){
-//
-//    }
-//    func applicationDidFinishLaunching(_ application: UIApplication) {
-//        if let svc = self.window?.rootViewController as? UISplitViewController {
-//            svc.preferredDisplayMode = .allVisible
-//            if let nc = svc.viewControllers.last as? UINavigationController {
-//                nc.topViewController?.navigationItem.leftBarButtonItem = svc.displayModeButtonItem
-//            }
-//        }
-//    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -112,28 +99,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
 }
 
 extension AppDelegate: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        let vc = (viewController as! UINavigationController).viewControllers.first
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let vc = (viewController as! UINavigationController).viewControllers.first
 
-        if vc is SeasonListViewController {
-           splitViewController.showDetailViewController((seasonDetailViewController?.wrappedInNavigation())!, sender: nil)
-        }
-        else if vc is HouseListViewController {
+            if vc is SeasonListViewController {
+                splitViewController.showDetailViewController((seasonDetailViewController?.wrappedInNavigation())!, sender: nil)
+            }
+            else if vc is HouseListViewController {
                 splitViewController.showDetailViewController((houseDetailViewController?.wrappedInNavigation())!, sender: nil)
           }
+        }
     }
 }
-
-//extension AppDelegate: UISplitViewControllerDelegate {
-//    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-//        return true
-//    }
-//    func primaryViewController(forCollapsing splitViewController: UISplitViewController) -> UIViewController? {
-//        return splitViewController.viewControllers.first
-//    }
-//}
 

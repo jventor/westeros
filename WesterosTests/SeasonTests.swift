@@ -62,10 +62,10 @@ class SeasonTests: XCTestCase {
     }
     
     func testAddEpisodies(){
-        XCTAssertEqual(season1.count, 0)
+        XCTAssertEqual(season1.count, 2)
         
         season1.add(episode: episode1_1)
-        XCTAssertEqual(season1.count, 1)
+        XCTAssertEqual(season1.count, 2)
         
         
         season1.add(episode: episode1_2)

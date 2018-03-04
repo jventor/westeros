@@ -12,10 +12,12 @@ import XCTest
 class RepositoryTests: XCTestCase {
     
     var localHouses: [House]!
+    var localSeasons: [Season]!
     
     override func setUp() {
         super.setUp()
         localHouses = Repository.local.houses
+        localSeasons = Repository.local.seasons
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -58,4 +60,10 @@ class RepositoryTests: XCTestCase {
         let stark = Repository.local.house(named: .Stark)
         XCTAssertEqual(stark?.name, "Stark")
     }
+    
+    func testSeasonFiltering(){
+        let filtered = Repository.local.seasons(filteredBy: { $0.count == 2 })
+        XCTAssertEqual (filtered.count, 8)
+    }
+    
 }

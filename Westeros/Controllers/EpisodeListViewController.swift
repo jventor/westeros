@@ -8,15 +8,10 @@
 
 import UIKit
 
-protocol EpisodeListViewControllerDelegate: class {
-    func episodeListViewController (_ vc: EpisodeListViewController, didSelectEpisode episode: Episode)
-}
-
 class EpisodeListViewController: UITableViewController {
     
     // MARK: - Properties
     var model : [Episode]
-    weak var delegate: EpisodeListViewControllerDelegate?
     
     // MARK: - Initialization
     init (model: [Episode]){
@@ -47,7 +42,6 @@ class EpisodeListViewController: UITableViewController {
         }
     }
     
-
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -70,7 +64,5 @@ class EpisodeListViewController: UITableViewController {
         let episode = model[indexPath.row]
         let episodeDetailViewController = EpisodeDetailViewController(model: episode)
         navigationController?.pushViewController(episodeDetailViewController, animated: true)
-        
     }
-
 }

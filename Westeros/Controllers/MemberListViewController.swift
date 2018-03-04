@@ -8,16 +8,11 @@
 
 import UIKit
 
-protocol MemberListViewControllerDelegate: class {
-    func memberListViewController(_ vc: MemberListViewController, didSelectMember member: Person)
-}
-
 // MARK: - Class: MemberListViewController
 class MemberListViewController: UITableViewController {
     // MARK: - Properties
     var model : House
-    weak var delegate: MemberListViewControllerDelegate?
-    
+   
     // MARK: - Inicialization
     init(model: House){
         self.model = model

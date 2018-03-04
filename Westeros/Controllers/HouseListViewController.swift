@@ -33,9 +33,11 @@ class HouseListViewController: UITableViewController {
     // MARK: - Cycle of life
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let lastRow = UserDefaults.standard.integer(forKey: Const.LastHouse)
-        let indexPath = IndexPath(row: lastRow, section: 0)
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let lastRow = UserDefaults.standard.integer(forKey: Const.LastHouse)
+            let indexPath = IndexPath(row: lastRow, section: 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        }
     }
     
     // MARK: - Table view data source
@@ -76,11 +78,6 @@ class HouseListViewController: UITableViewController {
                                         userInfo: [Const.HouseKey: house])
         notificationcCenter.post(notification)
         
-        if UI_USER_INTERFACE_IDIOM() == .phone {
-            let hdvc = HouseDetailViewController(model: house)
-            splitViewController?.showDetailViewController(hdvc.wrappedInNavigation(), sender: nil)
-        }
-        
         // Guardar las coordenadas de la ultima casa seleccionada
         saveLastSelectedHouse(at: indexPath.row)
     }
@@ -105,7 +102,12 @@ extension HouseListViewController {
     }
 }
 
-
+extension HouseListViewController: HouseListViewControllerDelegate{
+    func houseListViewController(_ vc: HouseListViewController, didSelectHouse house: House) {
+        let hdvc = HouseDetailViewController(model: house)
+        navigationController?.pushViewController(hdvc, animated: true)
+    }
+}
 
 
 

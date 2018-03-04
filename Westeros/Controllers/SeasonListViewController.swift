@@ -33,9 +33,11 @@ class SeasonListViewController: UITableViewController {
     // MARK: - Cycle of life
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let lastRow = UserDefaults.standard.integer(forKey: Const.LastSeason)
-        let indexPath = IndexPath(row: lastRow, section: 0)
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let lastRow = UserDefaults.standard.integer(forKey: Const.LastSeason)
+            let indexPath = IndexPath(row: lastRow, section: 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        }
     }
 
     // MARK: - Table view data source
@@ -74,11 +76,6 @@ class SeasonListViewController: UITableViewController {
                                         userInfo: [Const.SeasonKey: season])
         notificationCenter.post(notification)
         
-        if UI_USER_INTERFACE_IDIOM() == .phone {
-            let sdvc = SeasonDetailViewController(model: season)
-            splitViewController?.showDetailViewController(sdvc.wrappedInNavigation(), sender: nil)
-        }
-        
         // Guardar las coordenadas de la ultima casa seleccionada
         saveLastSelectedSeason(at: indexPath.row)
     }
@@ -102,3 +99,11 @@ extension SeasonListViewController {
         return season
     }
 }
+
+extension SeasonListViewController: SeasonListViewControllerDelegate{
+    func seasonListViewController(_ vc: SeasonListViewController, didSelectSeason season: Season) {
+        let sdvc = SeasonDetailViewController(model: season)
+        navigationController?.pushViewController(sdvc, animated: true)
+    }
+}
+
